@@ -10,6 +10,7 @@ import com.example.myapplication.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private var count1 = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +18,14 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.shopList.observe(this){
             Log.d("MainActivityTest", it.toString())
+            if (count1 == 0) {
+                count1++
+                val item = it[0]
+                viewModel.changeEnabledState(item)
+            }
+
+
         }
-        viewModel.getShopList()
 
     }
 }
