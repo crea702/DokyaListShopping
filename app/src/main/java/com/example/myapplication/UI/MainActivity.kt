@@ -1,12 +1,13 @@
 package com.example.myapplication.UI
 
+
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +22,12 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
+        }
 
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        buttonAddItem.setOnClickListener{
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
         }
 
     }
@@ -75,9 +81,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         shopListAdapter.onShopElementOnClickListener = {
-            val s = "item1.name"
-            val toast = Toast.makeText(this, "$s", Toast.LENGTH_SHORT)
-            toast.show()
+            val intent = ShopItemActivity.newItemEditItem(this, it.id)
+            startActivity(intent)
         }
     }
 
