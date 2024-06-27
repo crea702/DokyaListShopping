@@ -17,6 +17,12 @@ class ShopListAdapterClass : RecyclerView.Adapter<ShopListAdapterClass.ShopEleme
             notifyDataSetChanged()
         }
 
+    var onShopElementLongClickListener: ((ShopElement) -> Unit)? = null
+
+    var onShopElementOnClickListener: ((ShopElement) -> Unit)? = null
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopElementViewHolder {
 
         val layout = when (viewType) {
@@ -36,8 +42,14 @@ class ShopListAdapterClass : RecyclerView.Adapter<ShopListAdapterClass.ShopEleme
     override fun onBindViewHolder(viewHoler: ShopElementViewHolder, position: Int) {
         val shopElement14 = shopList1[position]
         viewHoler.view.setOnLongClickListener {
+            onShopElementLongClickListener?.invoke(shopElement14)
             true
         }
+
+        viewHoler.view.setOnClickListener{
+            onShopElementOnClickListener?.invoke(shopElement14)
+        }
+
             viewHoler.tvName.text = shopElement14.name
             viewHoler.tvCount.text = shopElement14.count.toString()
     }
@@ -69,4 +81,5 @@ class ShopListAdapterClass : RecyclerView.Adapter<ShopListAdapterClass.ShopEleme
 
         const val MAX_POOL_SIZE = 15
     }
+
 }

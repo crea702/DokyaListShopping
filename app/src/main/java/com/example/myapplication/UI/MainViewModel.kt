@@ -1,6 +1,6 @@
 package com.example.myapplication.UI
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.ShopListRepositoryImpl
 import com.example.myapplication.domain.DeleteShopElementUseCase
