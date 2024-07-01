@@ -1,7 +1,6 @@
 package com.example.myapplication.UI
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -81,8 +80,8 @@ class ShopItemFragment : Fragment() {
         when (screenMode) {
             MODE_EDIT -> launchEditMode()
             MODE_ADD -> launchAddMode()
-
         }
+
     }
 
     private fun addTextChangeListeners() {
@@ -128,7 +127,7 @@ class ShopItemFragment : Fragment() {
 
     private fun launchAddMode() {
         buttonSave.setOnClickListener {
-            viewModel.editShopElement(etName.text?.toString(), etCount.text?.toString())
+            viewModel.addShopElement(etName.text?.toString(), etCount.text?.toString())
         }
     }
 
@@ -169,12 +168,12 @@ class ShopItemFragment : Fragment() {
         private const val MODE_UNKNOWN = ""
 
         fun newInstanceAddItem() : ShopItemFragment {
-            val args = Bundle().apply {
-                putString(SCREEN_MODE, MODE_ADD)
+            return ShopItemFragment().apply {
+                arguments = Bundle().apply {
+                    putString(SCREEN_MODE, MODE_ADD)
+                }
             }
-            val fragment = ShopItemFragment()
-            fragment.arguments = args
-            return fragment
+
         }
 
         fun newInstanceEditItem(shopItemId: Int) : ShopItemFragment {
